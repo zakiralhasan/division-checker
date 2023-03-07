@@ -1,0 +1,79 @@
+/*=============================================
+=            VARIABLES                        =
+=============================================*/
+
+/**
+ * TABLE OF CONTENTS
+ * 
+ * COLORS
+ * Brand colors.......................These are the main brand colors. They will be used the most.
+ * Neutral colors ....................White and black, gray.
+ * Utility colors..................... Other colors to represent states: info, warning, success.
+ *
+ * TYPOGRAPHY
+ * Font Families.....................The fonts used in the design system.
+ * Font Weights..................... Font weights.
+ * Font Sizes............................ Font sizing for body text, paragraph, inputs
+ * 
+ * BREAKPOINTS
+ * Breakpoints ......................Global responsive breakpoints definitions.
+ * 
+ * SHADOW
+ * Shadow ...........................global fixed set of shadow variables
+ * 
+ */
+
+/*=============================================
+=            COLORS                           =
+=============================================*/
+
+/* Brand colors */
+$red: red;
+$green: green;
+$pink: pink;
+$yellow: yellow;
+
+/* Neutral colors */
+
+$white: white;
+$black: black;
+$gray: gray;
+
+/* Utilify colors */
+
+$green: green;
+$error: red;
+$warning: yellow;
+
+/*=====  End of colors  ======*/
+
+/*=============================================
+=            TYPOGRAPHY                      =
+=============================================*/
+
+/* Font Family */
+
+$fm-roboto-bold: "Roboto" sans-serif;
+
+/* Font Weight */
+
+$fw-normal: 500;
+$fw-bold: 700;
+$fw-black: 900;
+
+/* Font Sizes */
+
+$fs-normal: 18px;
+$fs-large: 24px;
+
+/*=====  End of typography  ======*/
+
+/*=============================================
+=            BREAKPOINTS                      =
+=============================================*/
+
+$breakpoints: (
+    md: 768px,
+    lg: 1024px,
+    xl: 1280px,
+);
