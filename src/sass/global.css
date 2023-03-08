@@ -41,6 +41,7 @@
 /* Brand colors */
 /* Neutral colors */
 /* Utilify colors */
+/*Other colors*/
 /*=====  End of colors  ======*/
 /*=============================================
 =            TYPOGRAPHY                      =
@@ -75,7 +76,7 @@ menu {
 
 .lms-container {
   max-width: 1280px;
-  margin: auto;
+  margin: 0 auto;
   z-index: 1;
 }
 
@@ -84,4 +85,46 @@ menu {
 =============================================*/
 /*=============================================
 =            Pages                            =
-=============================================*//*# sourceMappingURL=global.css.map */
+=============================================*/
+.home-page {
+  height: 100vh;
+  background-color: #F3F5F6;
+}
+.home-page h2 {
+  margin: 2rem auto;
+}
+
+.home-page__container {
+  max-width: 36rem;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.home-page__container form {
+  width: 16rem;
+  border-radius: 3%;
+  padding: 1rem;
+  background-color: white;
+}
+
+.home-page__container__village-section button {
+  width: 100%;
+  padding: 5px 6px;
+  margin: 5px auto;
+  background-color: #16BCDC;
+  border: none;
+  color: white;
+  border-radius: 4px;
+}
+
+.input-field {
+  width: 100%;
+  margin: 5px auto;
+  padding: 6px 5px;
+  outline: none;
+  background-color: #f6f8f9;
+  border: none;
+}/*# sourceMappingURL=global.css.map */

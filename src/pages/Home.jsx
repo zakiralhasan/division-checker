@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import data1 from "../assets/divisions.json";
 import data2 from "../assets/districts.json";
 import data3 from "../assets/upazilas.json";
 import data4 from "../assets/unions.json";
 import { useForm } from 'react-hook-form';
 const Home = () => {
-    // const [loading, setLoading] = (true)
     const { register, handleSubmit, reset } = useForm();
     const [selectDivision, setSelectDivision] = useState()
     const [selectDistrict, setSelectDistrict] = useState()
@@ -29,10 +28,11 @@ const Home = () => {
             "Village": data.village,
         }
         // console.log(totalInfo)
+        reset()
     }
-    useEffect(() => {
+    // useEffect(() => {
 
-    }, [selectDivision, selectDistrict, selectUpazila, selectUnion])
+    // }, [selectDivision, selectDistrict, selectUpazila, selectUnion])
 
     //Get division name and collect all data aginst that name.
     const filterdDivisionName = data1[0].data.filter(filtData => filtData.name === selectDivision);
@@ -59,66 +59,69 @@ const Home = () => {
 
     return (
         <div className='home-page'>
-            <h2>Home page</h2>
+            <div className='home-page__container'>
+                <h2>Please enter your village name <br />by selecting options.</h2>
 
-            <form onSubmit={handleSubmit(handleForm)}>
-                {/* division selector */}
-                <div className='home-page__division-section'>
-                    <select {...register("division", { onChange: (e) => setSelectDivision(e.target.value) })}>
-                        <option>Select Division</option>
-                        {
-                            data1[0].data.map(division => <option key={division.id} value={division.name}>{division.name}
-                            </option>)
-                        }
-                    </select>
-                </div>
-                {/* district selector */}
-                {selectDivision &&
-                    <div className='home-page__district-section'>
-                        <select {...register("district", { onChange: (e) => setSelectDistrict(e.target.value) })}>
-                            <option>Select District</option>
+                <form onSubmit={handleSubmit(handleForm)}>
+                    {/* division selector */}
+                    <div className='home-page__container__division-section '>
+                        <select {...register("division", { onChange: (e) => setSelectDivision(e.target.value) })} className='input-field'>
+                            <option>Select Division</option>
                             {
-                                filterdDistrictList?.map(district => <option key={district.id} value={district.name}>{district.name}</option>)
+                                data1[0].data.map(division => <option key={division.id} value={division.name}>{division.name}
+                                </option>)
                             }
                         </select>
                     </div>
+                    {/* district selector */}
+                    {selectDivision &&
+                        <div className='home-page__container__district-section'>
+                            <select {...register("district", { onChange: (e) => setSelectDistrict(e.target.value) })} className='input-field'>
+                                <option>Select District</option>
+                                {
+                                    filterdDistrictList?.map(district => <option key={district.id} value={district.name}>{district.name}</option>)
+                                }
+                            </select>
+                        </div>
 
-                }
+                    }
 
-                {/* upazila selector */}
-                {
-                    (selectDistrict && conditionOne) &&
-                    <div className='home-page__upazilla-section'>
-                        <select {...register("upazila", { onChange: (e) => setSelectUpazila(e.target.value) })}>
-                            <option>Select Upazila</option>
-                            {
-                                filterdUpazilaList?.map(upazila => <option key={upazila.id} value={upazila.name}>{upazila.name}</option>)
-                            }
-                        </select>
-                    </div>
-                }
-                {/* unions selector */}
-                {
-                    (selectUpazila && conditionTwo && conditionOne) &&
-                    <div className='home-page__union-section'>
-                        <select {...register("union", { onChange: (e) => setSelectUnion(e.target.value) })}>
-                            <option>Select Union</option>
-                            {
-                                filterdUnionList.map(union => <option key={union.id} value={union.name}>{union.name}</option>)
-                            }
-                        </select>
-                    </div>
-                }
-                {/* village name section*/}
-                {
-                    (selectUnion && conditionThree && conditionTwo && conditionOne) &&
-                    <div className='home-page__village-section'>
-                        <input type="text"  {...register("village")} placeholder="Enter your village name" />
-                        <button>submit</button>
-                    </div>
-                }
+                    {/* upazila selector */}
+                    {
+                        (selectDistrict && conditionOne) &&
+                        <div className='home-page__container__upazilla-section'>
+                            <select {...register("upazila", { onChange: (e) => setSelectUpazila(e.target.value) })} className='input-field'>
+                                <option>Select Upazila</option>
+                                {
+                                    filterdUpazilaList?.map(upazila => <option key={upazila.id} value={upazila.name}>{upazila.name}</option>)
+                                }
+                            </select>
+                        </div>
+                    }
+                    {/* unions selector */}
+                    {
+                        (selectUpazila && conditionTwo && conditionOne) &&
+                        <div className='home-page__container__union-section'>
+                            <select {...register("union", { onChange: (e) => setSelectUnion(e.target.value) })} className='input-field'>
+                                <option>Select Union</option>
+                                {
+                                    filterdUnionList.map(union => <option key={union.id} value={union.name}>{union.name}</option>)
+                                }
+                            </select>
+                        </div>
+                    }
+                    {/* village name section*/}
+                    {
+                        (selectUnion && conditionThree && conditionTwo && conditionOne) &&
+                        <div className='home-page__container__village-section'>
+                            <input className='input-field' type="text"  {...register("village")} placeholder="Enter your village name" />
+                            <button>SUBMIT</button>
+                        </div>
+                    }
 
-            </form>
+                </form>
+            </div>
+
         </div>
     );
 };

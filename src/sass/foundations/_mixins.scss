@@ -1,0 +1,14 @@
+@mixin get-item-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin common-design-for-input-field {
+    width: 100%;
+    margin: 5px auto;
+    padding: 6px 5px;
+    outline: none;
+    background-color: #f6f8f9;
+    border: none;
+}

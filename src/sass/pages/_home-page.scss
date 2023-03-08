@@ -1,0 +1,39 @@
+.home-page {
+    height: 100vh;
+    background-color: #F3F5F6;
+
+    h2 {
+        margin: 2rem auto;
+    }
+}
+
+.home-page__container {
+    max-width: 36rem;
+    margin: 0 auto;
+    padding: 1rem;
+    @include get-item-center;
+    flex-direction: column;
+
+    form {
+        width: 16rem;
+        border-radius: 3%;
+        padding: 1rem;
+        background-color: $white;
+    }
+}
+
+.home-page__container__village-section {
+    button {
+        width: 100%;
+        padding: 5px 6px;
+        margin: 5px auto;
+        background-color: $btn-color;
+        border: none;
+        color: $white;
+        border-radius: 4px;
+    }
+}
+
+.input-field {
+    @include common-design-for-input-field;
+}
