@@ -6,7 +6,7 @@ import data4 from "../assets/unions.json";
 import { useForm } from 'react-hook-form';
 import swal from 'sweetalert';
 const Home = () => {
-    const { register, handleSubmit, reset } = useForm();
+    const { register, handleSubmit } = useForm();
     const [selectDivision, setSelectDivision] = useState()
     const [selectDistrict, setSelectDistrict] = useState()
     const [selectUpazila, setSelectUpazila] = useState()
@@ -35,22 +35,22 @@ const Home = () => {
         });
     }
 
-    //Get division name and collect all data aginst that name.
+    //Get division name and collect all data against that name.
     const filterdDivisionName = data1[0].data.filter(filtData => filtData.name === selectDivision);
-    //Collect all district name regarding the above division.
+    //Collect all district names regarding the above division.
     const filterdDistrictList = data2[0].data.filter(filtData => filtData?.division_id === filterdDivisionName[0]?.id);
 
-    //Get district name and collect all data aginst that name.
+    //Get district name and collect all data against that name.
     const filterdDistrictName = data2[0].data.filter(filtData => filtData.name === selectDistrict);
-    //Collect all upazila name regarding the above district.
+    //Collect all upazila names regarding the above district.
     const filterdUpazilaList = data3[0].data.filter(filtData => filtData?.district_id === filterdDistrictName[0]?.id);
 
-    //Get upazila name and collect all data aginst that name.
+    //Get upazila name and collect all data against that name.
     const filterdUpazilaName = data3[0].data.filter(filtData => filtData.name === selectUpazila);
-    //Collect all union name regarding the above upazila.
+    //Collect all union names regarding the above upazila.
     const filterdUnionList = data4[0].data.filter(filtData => filtData?.upazilla_id === filterdUpazilaName[0]?.id);
 
-    //Get union name and collect all data aginst that name.
+    //Get union name and collect all data against that name.
     const filterdUnionName = data4[0].data.filter(filtData => filtData.name === selectUnion);
 
     //set conditions for visibility of the input or select field
