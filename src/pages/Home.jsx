@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import data1 from "../assets/divisions.json";
 import data2 from "../assets/districts.json";
 import data3 from "../assets/upazilas.json";
@@ -7,11 +7,11 @@ import { useForm } from 'react-hook-form';
 const Home = () => {
     // const [loading, setLoading] = (true)
     const { register, handleSubmit, reset } = useForm();
-    const [selecDivision, setSelectDivision] = useState()
-    const [selecDistrict, setSelectDistrict] = useState()
-    const [selecUpazila, setSelectUpazila] = useState()
-    const [selecUnion, setSelectUnion] = useState()
-    const [selecVillage, setSelectVillage] = useState()
+    const [selectDivision, setSelectDivision] = useState()
+    const [selectDistrict, setSelectDistrict] = useState()
+    const [selectUpazila, setSelectUpazila] = useState()
+    const [selectUnion, setSelectUnion] = useState()
+    const [selectVillage, setSelectVillage] = useState()
 
     const handleForm = data => {
         const divisionName = data.division;
@@ -30,21 +30,32 @@ const Home = () => {
         }
         // console.log(totalInfo)
     }
+    useEffect(() => {
+
+    }, [selectDivision, selectDistrict, selectUpazila, selectUnion])
 
     //Get division name and collect all data aginst that name.
-    const filterdDivisionName = data1[0].data.filter(filtData => filtData.name === selecDivision);
+    const filterdDivisionName = data1[0].data.filter(filtData => filtData.name === selectDivision);
     //Collect all district name regarding the above division.
     const filterdDistrictList = data2[0].data.filter(filtData => filtData?.division_id === filterdDivisionName[0]?.id);
 
     //Get district name and collect all data aginst that name.
-    const filterdDistrictName = data2[0].data.filter(filtData => filtData.name === selecDistrict);
+    const filterdDistrictName = data2[0].data.filter(filtData => filtData.name === selectDistrict);
     //Collect all upazila name regarding the above district.
     const filterdUpazilaList = data3[0].data.filter(filtData => filtData?.district_id === filterdDistrictName[0]?.id);
 
     //Get upazila name and collect all data aginst that name.
-    const filterdUpazilaName = data3[0].data.filter(filtData => filtData.name === selecUpazila);
+    const filterdUpazilaName = data3[0].data.filter(filtData => filtData.name === selectUpazila);
     //Collect all union name regarding the above upazila.
     const filterdUnionList = data4[0].data.filter(filtData => filtData?.upazilla_id === filterdUpazilaName[0]?.id);
+
+    //Get union name and collect all data aginst that name.
+    const filterdUnionName = data4[0].data.filter(filtData => filtData.name === selectUnion);
+
+    //set conditions for visibility of the input or select field
+    let conditionOne = filterdDivisionName[0]?.id === filterdDistrictName[0]?.division_id;
+    let conditionTwo = filterdDistrictName[0]?.id === filterdUpazilaName[0]?.district_id;
+    let conditionThree = filterdUpazilaName[0]?.id === filterdUnionName[0]?.upazilla_id;
 
     return (
         <div className='home-page'>
@@ -52,7 +63,7 @@ const Home = () => {
 
             <form onSubmit={handleSubmit(handleForm)}>
                 {/* division selector */}
-                <div>
+                <div className='home-page__division-section'>
                     <select {...register("division", { onChange: (e) => setSelectDivision(e.target.value) })}>
                         <option>Select Division</option>
                         {
@@ -62,8 +73,8 @@ const Home = () => {
                     </select>
                 </div>
                 {/* district selector */}
-                {selecDivision &&
-                    <div>
+                {selectDivision &&
+                    <div className='home-page__district-section'>
                         <select {...register("district", { onChange: (e) => setSelectDistrict(e.target.value) })}>
                             <option>Select District</option>
                             {
@@ -71,12 +82,13 @@ const Home = () => {
                             }
                         </select>
                     </div>
+
                 }
 
                 {/* upazila selector */}
                 {
-                    selecDistrict &&
-                    <div>
+                    (selectDistrict && conditionOne) &&
+                    <div className='home-page__upazilla-section'>
                         <select {...register("upazila", { onChange: (e) => setSelectUpazila(e.target.value) })}>
                             <option>Select Upazila</option>
                             {
@@ -87,8 +99,8 @@ const Home = () => {
                 }
                 {/* unions selector */}
                 {
-                    selecUpazila &&
-                    <div>
+                    (selectUpazila && conditionTwo && conditionOne) &&
+                    <div className='home-page__union-section'>
                         <select {...register("union", { onChange: (e) => setSelectUnion(e.target.value) })}>
                             <option>Select Union</option>
                             {
@@ -99,8 +111,8 @@ const Home = () => {
                 }
                 {/* village name section*/}
                 {
-                    selecUnion &&
-                    <div>
+                    (selectUnion && conditionThree && conditionTwo && conditionOne) &&
+                    <div className='home-page__village-section'>
                         <input type="text"  {...register("village")} placeholder="Enter your village name" />
                         <button>submit</button>
                     </div>
