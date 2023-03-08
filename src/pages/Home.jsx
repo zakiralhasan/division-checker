@@ -115,7 +115,7 @@ const Home = () => {
                     {
                         (selectUnion && conditionThree && conditionTwo && conditionOne) &&
                         <div className='home-page__container__village-section'>
-                            <input className='input-field' type="text"  {...register("village")} placeholder="Enter your village name" />
+                            <input className='input-field' type="text"  {...register("village")} placeholder="Enter your village name" required />
                             <button>SUBMIT</button>
                         </div>
                     }
