@@ -4,22 +4,15 @@ import data2 from "../assets/districts.json";
 import data3 from "../assets/upazilas.json";
 import data4 from "../assets/unions.json";
 import { useForm } from 'react-hook-form';
+import swal from 'sweetalert';
 const Home = () => {
     const { register, handleSubmit, reset } = useForm();
     const [selectDivision, setSelectDivision] = useState()
     const [selectDistrict, setSelectDistrict] = useState()
     const [selectUpazila, setSelectUpazila] = useState()
     const [selectUnion, setSelectUnion] = useState()
-    const [selectVillage, setSelectVillage] = useState()
 
     const handleForm = data => {
-        const divisionName = data.division;
-        const districtName = data.district;
-        const upazilaName = data.upazila;
-        const unionName = data.union;
-        const villageName = data.village;
-        // console.log(data.village)
-
         const totalInfo = {
             "Division": data.division,
             "District": data.district,
@@ -27,12 +20,20 @@ const Home = () => {
             "Union": data.union,
             "Village": data.village,
         }
-        // console.log(totalInfo)
-        reset()
+        console.log(totalInfo)
+        swal({
+            title: "Your Select Data",
+            text: `
+            Division Name: ${totalInfo.Division}
+            District Name: ${totalInfo.District}
+            Upazila Name : ${totalInfo.Upazila}
+            Union Name   : ${totalInfo.Union}  
+            Village Name : ${totalInfo.Village}  
+            `,
+            icon: "success",
+            button: "Okay",
+        });
     }
-    // useEffect(() => {
-
-    // }, [selectDivision, selectDistrict, selectUpazila, selectUnion])
 
     //Get division name and collect all data aginst that name.
     const filterdDivisionName = data1[0].data.filter(filtData => filtData.name === selectDivision);
@@ -74,7 +75,7 @@ const Home = () => {
                         </select>
                     </div>
                     {/* district selector */}
-                    {selectDivision &&
+                    {(selectDivision && selectDivision !== 'Select Division') &&
                         <div className='home-page__container__district-section'>
                             <select {...register("district", { onChange: (e) => setSelectDistrict(e.target.value) })} className='input-field'>
                                 <option>Select District</option>
@@ -88,7 +89,7 @@ const Home = () => {
 
                     {/* upazila selector */}
                     {
-                        (selectDistrict && conditionOne) &&
+                        (selectDistrict && conditionOne && selectDistrict !== 'Select District') &&
                         <div className='home-page__container__upazilla-section'>
                             <select {...register("upazila", { onChange: (e) => setSelectUpazila(e.target.value) })} className='input-field'>
                                 <option>Select Upazila</option>
@@ -100,7 +101,7 @@ const Home = () => {
                     }
                     {/* unions selector */}
                     {
-                        (selectUpazila && conditionTwo && conditionOne) &&
+                        (selectUpazila && conditionTwo && conditionOne && selectUpazila !== 'Select Upazila') &&
                         <div className='home-page__container__union-section'>
                             <select {...register("union", { onChange: (e) => setSelectUnion(e.target.value) })} className='input-field'>
                                 <option>Select Union</option>
